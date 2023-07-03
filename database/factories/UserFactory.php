@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -22,10 +23,15 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'username' => fake()->unique()->userName(),
             'avatar' => 'https://i.pravatar.cc/150?img=3'.fake()->numberBetween(1, 70),
+            'profile' => $this->faker->sentence(14),
+            'location' => $this->faker ->city().' '. $this->faker->country(),
+            'link' => 'https://arqcomputer.com',
+            'linkText' => collect(['https://arqcomputer.com', 'https://davidrosas.com'])->random(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'created_at' => $this->faker->dateTimeBetween('-5 years', now())
         ];
     }
 
